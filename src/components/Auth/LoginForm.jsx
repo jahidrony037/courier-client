@@ -1,10 +1,13 @@
-// src/components/auth/LoginForm.jsx
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
+import "../../i18n/i18n"; // Ensure i18n is initialized
 import { useAuthService } from "../../services/useAuthService";
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -18,9 +21,11 @@ const LoginForm = () => {
     try {
       const res = await loginUser(data);
       login(res.user, res.token);
+      toast.success("Login successful!");
       navigate("/");
     } catch (err) {
       console.error("Login Failed", err);
+      toast.error("Login failed. Check credentials.");
     }
   };
 
@@ -30,7 +35,7 @@ const LoginForm = () => {
       className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg mx-auto space-y-6"
     >
       <h2 className="text-3xl font-bold text-center text-primary">
-        Welcome Back
+        {t("welcome")} Back Our Courier System
       </h2>
 
       {/* Email */}

@@ -14,5 +14,10 @@ export const useAuthService = () => {
     return res.data;
   };
 
-  return { loginUser, registerUser };
+  const logOutUser = async () => {
+    const res = await axiosPublic.post('/auth/logout');
+    return res.data;
+    }
+
+  return { loginUser, registerUser, logOutUser };
 };

@@ -1,6 +1,7 @@
 // src/components/auth/RegisterForm.jsx
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/useAuth";
 import { useAuthService } from "../../services/useAuthService";
 
@@ -17,10 +18,15 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     try {
       const res = await registerUser(data);
+      if (res.token) {
+        toast.success("Registration successful! Please login.");
+      }
       login(res.user, res.token);
       navigate("/");
     } catch (err) {
-      console.error("Registration Failed", err);
+      toast.error(
+        err?.response?.data?.message || "Registration failed. Try again."
+      );
     }
   };
 
