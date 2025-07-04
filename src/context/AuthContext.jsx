@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthService } from "../services/useAuthService";
 
@@ -35,10 +34,6 @@ export const AuthProvider = ({ children }) => {
       setToken(null);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-
-      // Optionally, navigate to login page (if needed)
-
-      Navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
     }

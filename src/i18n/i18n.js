@@ -1,7 +1,7 @@
-import i18n from 'i18next'; // Import directly from i18next
-import LanguageDetector from 'i18next-browser-languagedetector'; // Import the language detector
-import { initReactI18next } from 'react-i18next'; // Import directly from react-i18next
-import bnTranslation from '../../public/locales/bn/translation.json'; // Your translation files
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+import bnTranslation from '../../public/locales/bn/translation.json';
 import enTranslation from '../../public/locales/en/translation.json';
 
 

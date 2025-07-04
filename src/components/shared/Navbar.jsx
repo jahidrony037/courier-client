@@ -1,3 +1,5 @@
+// src/components/shared/Navbar.jsx
+
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -8,27 +10,23 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Toggle the menu open/close
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Close the menu and navigate to the selected route
   const handleMenuItemClick = (route) => {
-    setMenuOpen(false); // Close the menu when clicking a menu item
-    navigate(route); // Navigate to the selected route
+    setMenuOpen(false);
+    navigate(route);
   };
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="text-2xl font-bold text-primary">
               Courier<span className="text-accent">Pro</span>
             </Link>
           </div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex gap-6 items-center">
             <NavLink
               to="/"
@@ -40,16 +38,17 @@ const Navbar = () => {
             >
               Home
             </NavLink>
+
             {user && user.role === "customer" && (
               <NavLink
-                to="/book"
+                to="/customer/dashboard"
                 className={({ isActive }) =>
                   isActive
                     ? "text-primary font-semibold"
                     : "text-gray-600 hover:text-primary transition"
                 }
               >
-                Book Parcel
+                Customer Dashboard
               </NavLink>
             )}
             {user && user.role === "admin" && (
@@ -66,16 +65,17 @@ const Navbar = () => {
             )}
             {user && user.role === "agent" && (
               <NavLink
-                to="/agent/parcels"
+                to="/agent/dashboard"
                 className={({ isActive }) =>
                   isActive
                     ? "text-primary font-semibold"
                     : "text-gray-600 hover:text-primary transition"
                 }
               >
-                Agent Parcels
+                Agent Dashboard
               </NavLink>
             )}
+
             {!user ? (
               <>
                 <NavLink
@@ -108,15 +108,11 @@ const Navbar = () => {
               </button>
             )}
 
-            {/* Language Switcher Dropdown */}
             <LanguageSwitcher />
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            {/* Language Switcher in Mobile Menu (Left) */}
             <LanguageSwitcher />
-
             <button
               onClick={toggleMenu}
               className="btn btn-ghost btn-circle ml-4"
@@ -140,13 +136,11 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       <div
         className={`md:hidden fixed top-0 right-0 w-full h-full bg-white shadow-lg transition-transform duration-500 ease-in-out transform ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Close Button */}
         <div className="flex justify-end p-4">
           <button
             onClick={toggleMenu}
@@ -183,15 +177,15 @@ const Navbar = () => {
           </NavLink>
           {user && user.role === "customer" && (
             <NavLink
-              to="/book"
-              onClick={() => handleMenuItemClick("/book")}
+              to="/customer/dashboard"
+              onClick={() => handleMenuItemClick("/customer/dashboard")}
               className={({ isActive }) =>
                 isActive
                   ? "text-primary font-semibold"
                   : "text-gray-600 hover:text-primary transition"
               }
             >
-              Book Parcel
+              Customer Dashboard
             </NavLink>
           )}
           {user && user.role === "admin" && (
@@ -209,15 +203,15 @@ const Navbar = () => {
           )}
           {user && user.role === "agent" && (
             <NavLink
-              to="/agent/parcels"
-              onClick={() => handleMenuItemClick("/agent/parcels")}
+              to="/agent/dashboard"
+              onClick={() => handleMenuItemClick("/agent/dashboard")}
               className={({ isActive }) =>
                 isActive
                   ? "text-primary font-semibold"
                   : "text-gray-600 hover:text-primary transition"
               }
             >
-              Agent Parcels
+              Agent Dashboard
             </NavLink>
           )}
           {!user ? (

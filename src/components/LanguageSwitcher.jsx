@@ -5,8 +5,7 @@ const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language || "en");
-  const dropdownRef = useRef(null); // Reference for the dropdown container
-
+  const dropdownRef = useRef(null);
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     setCurrentLanguage(lng);
